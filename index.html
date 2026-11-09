@@ -57,19 +57,20 @@
             justify-content: center;
             text-align: center;
             width: 90%;
-            max-width: 850px; /* Büyüyen içerik için genişletildi */
+            max-width: 850px; 
             animation: fadeIn 1.5s ease-out;
-            transform: translateY(-25%); 
-            gap: 5px; 
+            transform: translateY(-20%); 
+            /* Öğeler arası boşluğu standart 15px yaptık */
+            gap: 15px; 
         }
 
         /* Logo Ayarları */
         .logo {
-            max-width: 550px; /* Logo belirgin şekilde büyütüldü */
+            max-width: 550px; 
             width: 100%;
             height: auto;
-            /* Logo büyüdüğü için boşluk da büyüdü, eksi değeri artırdık */
-            margin-bottom: -100px; 
+            /* YAZILARIN İÇ İÇE GİRMESİNE SEBEP OLAN NEGATİF DEĞER SİLİNDİ */
+            margin: 0; 
             filter: drop-shadow(0 0 20px rgba(97, 211, 249, 0.25));
             position: relative;
             z-index: 3;
@@ -77,8 +78,9 @@
 
         /* Metin Ayarları */
         h1 {
-            font-size: 1.8rem; /* Yazı boyutu artırıldı */
-            margin: -15px 0 0 0; 
+            font-size: 1.8rem; 
+            /* Negatif üst boşluk temizlendi */
+            margin: 0; 
             font-weight: normal;
             letter-spacing: 1px;
             color: #ffffff;
@@ -89,8 +91,8 @@
         }
 
         p {
-            font-size: 1.3rem; /* Alt yazı boyutu artırıldı */
-            margin: 5px 0 15px 0; 
+            font-size: 1.3rem; 
+            margin: 0; 
             color: #61d3f9; 
             text-shadow: 0 0 10px rgba(97, 211, 249, 0.45);
             letter-spacing: 0.5px;
@@ -102,7 +104,7 @@
         .btn {
             display: inline-block;
             padding: 16px 45px;
-            font-size: 1.15rem; /* Buton yazısı da genel orantıya uyacak şekilde çok hafif büyütüldü */
+            font-size: 1.15rem; 
             color: #000000;
             background-color: #61d3f9;
             text-decoration: none;
@@ -115,7 +117,7 @@
             letter-spacing: 1.5px;
             border: none;
             cursor: pointer;
-            margin-top: 10px; 
+            margin-top: 15px; 
             position: relative;
             z-index: 4;
         }
@@ -128,19 +130,19 @@
 
         /* Animasyon */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-15%); }
-            to { opacity: 1; transform: translateY(-25%); } 
+            from { opacity: 0; transform: translateY(-10%); }
+            to { opacity: 1; transform: translateY(-20%); } 
         }
 
         @media (max-width: 600px) {
             .logo { 
                 max-width: 380px; 
-                margin-bottom: -65px; 
+                margin: 0; 
             }
-            h1 { font-size: 1.4rem; margin-top: -10px; }
-            p { font-size: 1.1rem; }
-            .btn { padding: 14px 35px; font-size: 1rem; }
-            .content { transform: translateY(-28%); }
+            h1 { font-size: 1.4rem; margin: 0; }
+            p { font-size: 1.1rem; margin: 0;}
+            .btn { padding: 14px 35px; font-size: 1rem; margin-top: 10px; }
+            .content { transform: translateY(-25%); gap: 10px;}
         }
     </style>
 </head>
