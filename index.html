@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poweroff.cc - Welcome to the Network</title>
     <style>
-        /* Temel Ayarlar */
+        /* Temel Ayarlar ve Kusursuz Ortalama */
         body, html {
             margin: 0;
             padding: 0;
@@ -19,7 +19,7 @@
             align-items: center;
         }
 
-        /* Sabit Dijital Ağ Arka Planı (Görseldeki gibi hafif noktalar ve bağlar) */
+        /* Sabit Dijital Ağ Arka Planı */
         .background {
             position: absolute;
             top: 0;
@@ -33,9 +33,9 @@
             background-size: 80px 80px, 120px 120px;
             background-position: 0 0, 40px 40px;
             opacity: 0.8;
+            pointer-events: none;
         }
 
-        /* Ekstra derinlik için hafif gölgelendirme katmanı */
         .overlay {
             position: absolute;
             top: 0;
@@ -44,9 +44,10 @@
             height: 100%;
             background: radial-gradient(circle at center, transparent 30%, #000000 95%);
             z-index: 2;
+            pointer-events: none;
         }
 
-        /* Tam Ortalanmış İçerik Bloğu */
+        /* İçerik Bloğu */
         .content {
             position: relative;
             z-index: 3;
@@ -55,47 +56,53 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: #ffffff;
             width: 90%;
-            max-width: 650px;
-            /* Dikeyde ve yatayda tam sığması için kompakt padding ve margin */
-            padding: 20px;
+            max-width: 850px; /* Büyüyen içerik için genişletildi */
             animation: fadeIn 1.5s ease-out;
+            transform: translateY(-25%); 
+            gap: 5px; 
         }
 
-        /* Logo Ayarları - Şeffaf Logo */
+        /* Logo Ayarları */
         .logo {
-            max-width: 280px;
+            max-width: 550px; /* Logo belirgin şekilde büyütüldü */
             width: 100%;
             height: auto;
-            margin-bottom: 25px;
+            /* Logo büyüdüğü için boşluk da büyüdü, eksi değeri artırdık */
+            margin-bottom: -100px; 
             filter: drop-shadow(0 0 20px rgba(97, 211, 249, 0.25));
+            position: relative;
+            z-index: 3;
         }
 
         /* Metin Ayarları */
         h1 {
-            font-size: 1.45rem;
-            margin: 0 0 8px 0;
+            font-size: 1.8rem; /* Yazı boyutu artırıldı */
+            margin: -15px 0 0 0; 
             font-weight: normal;
             letter-spacing: 1px;
             color: #ffffff;
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-            line-height: 1.4;
+            line-height: 1.2;
+            position: relative;
+            z-index: 4; 
         }
 
         p {
-            font-size: 1.1rem;
-            margin: 0 0 35px 0;
-            color: #61d3f9; /* Logodaki mavi/turkuaz tonu */
+            font-size: 1.3rem; /* Alt yazı boyutu artırıldı */
+            margin: 5px 0 15px 0; 
+            color: #61d3f9; 
             text-shadow: 0 0 10px rgba(97, 211, 249, 0.45);
             letter-spacing: 0.5px;
+            position: relative;
+            z-index: 4;
         }
 
         /* Buton Tasarımı */
         .btn {
             display: inline-block;
-            padding: 15px 40px;
-            font-size: 1.1rem;
+            padding: 16px 45px;
+            font-size: 1.15rem; /* Buton yazısı da genel orantıya uyacak şekilde çok hafif büyütüldü */
             color: #000000;
             background-color: #61d3f9;
             text-decoration: none;
@@ -108,38 +115,41 @@
             letter-spacing: 1.5px;
             border: none;
             cursor: pointer;
+            margin-top: 10px; 
+            position: relative;
+            z-index: 4;
         }
 
         .btn:hover {
             background-color: #ffffff;
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
-            transform: translateY(-2px); /* Çok hafif yukarı tepki */
+            transform: translateY(-2px);
         }
 
-        /* Giriş Animasyonu */
+        /* Animasyon */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(-15%); }
+            to { opacity: 1; transform: translateY(-25%); } 
         }
 
-        /* Mobil Cihazlar İçin Optimizasyon */
         @media (max-width: 600px) {
-            .logo { max-width: 220px; }
-            h1 { font-size: 1.1rem; }
-            p { font-size: 0.95rem; }
-            .btn { padding: 12px 30px; font-size: 0.95rem; }
+            .logo { 
+                max-width: 380px; 
+                margin-bottom: -65px; 
+            }
+            h1 { font-size: 1.4rem; margin-top: -10px; }
+            p { font-size: 1.1rem; }
+            .btn { padding: 14px 35px; font-size: 1rem; }
+            .content { transform: translateY(-28%); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Sabit Dijital Ağ / Nokta Efekti Arka Planı -->
     <div class="background"></div>
     <div class="overlay"></div>
 
-    <!-- Merkez İçerik (Dikey ve Yatayda Kusursuz Hizalanmış) -->
     <div class="content">
-        <!-- Logo görselinin adını kendi dosya adınla (örn. logo.png) değiştirmeyi unutma -->
         <img src="logo.png" alt="Poweroff Logo" class="logo">
         <h1>Welcome to the darkness of the Network.</h1>
         <p>Power off any system..</p>
