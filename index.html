@@ -6,44 +6,47 @@
     <title>Poweroff.cc - Welcome to the Network</title>
     <style>
         /* Temel Ayarlar */
-        * {
-            box-sizing: border-box;
+        body, html {
             margin: 0;
             padding: 0;
-        }
-        
-        body, html {
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #000000;
             font-family: 'Courier New', Courier, monospace;
+            background-color: #050505;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Animasyonlu Plexus Arka Planı */
-        #plexus-bg {
+        /* Sabit Dijital Ağ Arka Planı (Görseldeki gibi hafif noktalar ve bağlar) */
+        .background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 1;
-            display: block;
+            background-image: 
+                radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                radial-gradient(circle, rgba(97, 211, 249, 0.03) 1px, transparent 1.5px);
+            background-size: 80px 80px, 120px 120px;
+            background-position: 0 0, 40px 40px;
+            opacity: 0.8;
         }
 
-        /* Karartma ve Derinlik Katmanı */
+        /* Ekstra derinlik için hafif gölgelendirme katmanı */
         .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%);
+            background: radial-gradient(circle at center, transparent 30%, #000000 95%);
             z-index: 2;
-            pointer-events: none;
         }
 
-        /* Merkez İçerik Konteyneri */
+        /* Tam Ortalanmış İçerik Bloğu */
         .content {
             position: relative;
             z-index: 3;
@@ -51,206 +54,97 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
             text-align: center;
-            padding: 20px;
             color: #ffffff;
-            animation: fadeIn 2s ease-in-out;
+            width: 90%;
+            max-width: 650px;
+            /* Dikeyde ve yatayda tam sığması için kompakt padding ve margin */
+            padding: 20px;
+            animation: fadeIn 1.5s ease-out;
         }
 
-        /* Logo Ayarları (Büyütülmüş) */
+        /* Logo Ayarları - Şeffaf Logo */
         .logo {
-            max-width: 520px; /* Logo boyutu artırıldı */
-            width: 95%;
+            max-width: 280px;
+            width: 100%;
             height: auto;
             margin-bottom: 25px;
-            filter: drop-shadow(0 0 15px rgba(97, 211, 249, 0.2)); /* Logoya hafif mavi derinlik */
+            filter: drop-shadow(0 0 20px rgba(97, 211, 249, 0.25));
         }
 
         /* Metin Ayarları */
         h1 {
-            font-size: 1.8rem;
-            margin: 15px 0 10px 0;
+            font-size: 1.45rem;
+            margin: 0 0 8px 0;
             font-weight: normal;
-            letter-spacing: 1.5px;
-            color: #f0f0f0;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+            letter-spacing: 1px;
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+            line-height: 1.4;
         }
 
         p {
-            font-size: 1.3rem;
-            margin-bottom: 45px;
-            color: #61d3f9; /* Logodaki siber mavi */
-            text-shadow: 0 0 12px rgba(97, 211, 249, 0.6);
-            letter-spacing: 1px;
+            font-size: 1.1rem;
+            margin: 0 0 35px 0;
+            color: #61d3f9; /* Logodaki mavi/turkuaz tonu */
+            text-shadow: 0 0 10px rgba(97, 211, 249, 0.45);
+            letter-spacing: 0.5px;
         }
 
         /* Buton Tasarımı */
         .btn {
             display: inline-block;
-            padding: 18px 50px;
-            font-size: 1.25rem;
-            color: #000;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            color: #000000;
             background-color: #61d3f9;
             text-decoration: none;
             font-weight: bold;
             border-radius: 4px;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             box-shadow: 0 0 20px rgba(97, 211, 249, 0.6);
             text-transform: uppercase;
             font-family: 'Arial', sans-serif;
             letter-spacing: 1.5px;
-            border: 2px solid transparent;
+            border: none;
+            cursor: pointer;
         }
 
         .btn:hover {
-            background-color: transparent;
-            color: #61d3f9;
-            border-color: #61d3f9;
-            box-shadow: 0 0 35px rgba(97, 211, 249, 0.9);
-            transform: translateY(-4px);
+            background-color: #ffffff;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px); /* Çok hafif yukarı tepki */
         }
 
         /* Giriş Animasyonu */
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.96); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Mobil Uyum */
+        /* Mobil Cihazlar İçin Optimizasyon */
         @media (max-width: 600px) {
-            .logo { max-width: 320px; }
-            h1 { font-size: 1.15rem; }
-            p { font-size: 0.95rem; margin-bottom: 35px; }
-            .btn { padding: 14px 35px; font-size: 1rem; }
+            .logo { max-width: 220px; }
+            h1 { font-size: 1.1rem; }
+            p { font-size: 0.95rem; }
+            .btn { padding: 12px 30px; font-size: 0.95rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Dinamik Plexus (Ağ) Arka Planı -->
-    <canvas id="plexus-bg"></canvas>
-    
-    <!-- Karartma Katmanı -->
+    <!-- Sabit Dijital Ağ / Nokta Efekti Arka Planı -->
+    <div class="background"></div>
     <div class="overlay"></div>
 
-    <!-- Merkez İçerik -->
+    <!-- Merkez İçerik (Dikey ve Yatayda Kusursuz Hizalanmış) -->
     <div class="content">
-        <!-- Logo ismini "logo.png" olarak ayarladım -->
+        <!-- Logo görselinin adını kendi dosya adınla (örn. logo.png) değiştirmeyi unutma -->
         <img src="logo.png" alt="Poweroff Logo" class="logo">
         <h1>Welcome to the darkness of the Network.</h1>
         <p>Power off any system..</p>
-        <a href="https://discord.gg/poweroff" class="btn">Join to Underground</a>
+        <a href="https://discord.gg/poweroff" class="btn">JOIN TO UNDERGROUND</a>
     </div>
 
-    <!-- Plexus Parçacık Animasyonu (JavaScript) -->
-    <script>
-        const canvas = document.getElementById('plexus-bg');
-        const ctx = canvas.getContext('2d');
-
-        let particles = [];
-        const properties = {
-            bgColor: '#000000',
-            particleColor: 'rgba(255, 255, 255, 0.5)',
-            lineColor: 'rgba(255, 255, 255, 0.08)',
-            particleRadius: 1.5,
-            particleCount: 80, // Parçacık yoğunluğu
-            maxVelocity: 0.4,   // Hareket hızı
-            lineLength: 130     // Bağlantı çizgisi mesafesi
-        };
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            if(window.innerWidth < 600) {
-                properties.particleCount = 40; // Mobil performansı için daha az parçacık
-            } else {
-                properties.particleCount = 80;
-            }
-        }
-
-        window.addEventListener('resize', () => {
-            resizeCanvas();
-        });
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.velocityX = (Math.random() * (properties.maxVelocity * 2)) - properties.maxVelocity;
-                this.velocityY = (Math.random() * (properties.maxVelocity * 2)) - properties.maxVelocity;
-            }
-
-            position() {
-                // Kenarlardan sekme
-                if (this.x + this.velocityX > canvas.width || this.x + this.velocityX < 0) {
-                    this.velocityX = -this.velocityX;
-                }
-                if (this.y + this.velocityY > canvas.height || this.y + this.velocityY < 0) {
-                    this.velocityY = -this.velocityY;
-                }
-                this.x += this.velocityX;
-                this.y += this.velocityY;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, properties.particleRadius, 0, Math.PI * 2);
-                ctx.fillStyle = properties.particleColor;
-                ctx.fill();
-            }
-        }
-
-        function drawLines() {
-            let x1, y1, x2, y2, distance;
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    x1 = particles[i].x;
-                    y1 = particles[i].y;
-                    x2 = particles[j].x;
-                    y2 = particles[j].y;
-
-                    distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-
-                    if (distance < properties.lineLength) {
-                        ctx.beginPath();
-                        ctx.moveTo(x1, y1);
-                        ctx.lineTo(x2, y2);
-                        // Mesafe yaklaştıkça çizgiler biraz daha belirginleşir
-                        let opacity = 1 - (distance / properties.lineLength);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.12})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function init() {
-            resizeCanvas();
-            particles = [];
-            for (let i = 0; i < properties.particleCount; i++) {
-                particles.push(new Particle());
-            }
-            loop();
-        }
-
-        function loop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = properties.bgColor;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            drawLines();
-
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].position();
-                particles[i].draw();
-            }
-
-            requestAnimationFrame(loop);
-        }
-
-        init();
-    </script>
 </body>
 </html>
